@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&family=Outfit:wght@800&family=Spectral:wght@200&display=swap");
+.login {
+  background-color: #18345e;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__main {
+  width: 65%;
+  height: 90%;
+  box-shadow: 0 0 36px black;
+  display: flex;
+}
+
+.login__mainLeft {
+  flex: 0.5;
+}
+
+.login__mainRight {
+  flex: 0.5;
+  background-color: #f4f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__mainRight > form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 60%;
+  font-family: "Open Sans", sans-serif;
+  color: #18345e;
+}
+
+.login__mainRight > form > input {
+  outline-width: 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid lightgray;
+  background-color: #f4f2f2;
+}
+
+.login__mainRight > form > * {
+  margin-bottom: 8px;
+}
+
+.login__mainRight > form > label {
+  font-weight: 800;
+  font-size: small;
+}
+
+.login__mainRight > form > h1 {
+  font-weight: 1000;
+  font-size: 3rem;
+}
+
+.login__mainRight > form > button {
+  margin-top: 10px;
+  all: unset;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #f0ab20;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 5px;
+}
+
+.signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup > a {
+  text-decoration: none;
+  color: #22c1dc;
+  font-weight: 800;
+  padding-left: 10px;
+}
+
+.login__mainLeft {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login__mainLeft__image {
+  height: 40%;
+}

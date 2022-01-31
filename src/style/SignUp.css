@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&family=Outfit:wght@800&family=Spectral:wght@200&display=swap");
+.signUp {
+  background-color: #18345e;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signUp__main {
+  width: 65%;
+  height: 90%;
+  box-shadow: 0 0 36px black;
+  display: flex;
+}
+
+.signUp__mainLeft {
+  flex: 0.5;
+}
+
+.signUp__mainRight {
+  flex: 0.5;
+  background-color: #f4f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signUp__mainRight > form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 60%;
+  font-family: "Open Sans", sans-serif;
+  color: #18345e;
+}
+
+.signUp__mainRight > form > input {
+  outline-width: 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid lightgray;
+  background-color: #f4f2f2;
+}
+
+.signUp__mainRight > form > * {
+  margin-bottom: 8px;
+}
+
+.signUp__mainRight > form > label {
+  font-weight: 800;
+  font-size: small;
+}
+
+.signUp__mainRight > form > h1 {
+  font-weight: 1000;
+  font-size: 3rem;
+}
+
+.signUp__mainRight > form > button {
+  margin-top: 18px;
+  all: unset;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #f0ab20;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 5px;
+}
+
+.signUp__mainLeft {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.signUp__mainLeft__image {
+  height: 40%;
+}
+
+.signUp__mainRight__name {
+  display: flex;
+}
+
+.signUp__mainRight__firstname > label,
+.signUp__mainRight__lastname > label {
+  font-size: small;
+  font-weight: 800;
+}
+
+.signUp__mainRight__firstname > input,
+.signUp__mainRight__lastname > input {
+  outline-width: 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid lightgray;
+  background-color: #f4f2f2;
+  margin-top: 8px;
+}
+
+.signUp__mainRight__password {
+  display: flex;
+}
+
+.signUp__mainRight__firstpassword > label,
+.signUp__mainRight__confirmpassword > label {
+  font-size: small;
+  font-weight: 800;
+}
+
+.signUp__mainRight__firstpassword > input,
+.signUp__mainRight__confirmpassword > input {
+  outline-width: 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid lightgray;
+  background-color: #f4f2f2;
+  margin-top: 8px;
+}
+
+.signUp__mainRight__name > div > *,
+.signUp__mainRight__password {
+  margin-bottom: 8px;
+}

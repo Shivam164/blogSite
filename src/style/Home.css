@@ -1,0 +1,47 @@
+.banner {
+  height: 60vh;
+  background-image: linear-gradient(#7207fa, white);
+}
+
+.navbar {
+  display: flex;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 80px;
+  margin-left: 80px;
+}
+
+.navbar__logo {
+  flex: 0.4;
+  font-weight: 800;
+  font-size: 50px;
+}
+
+.navbar__routes {
+  flex: 0.6;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar__routes > a {
+  text-decoration: none;
+  color: white;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+.navbar__image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.blogs {
+  background-color: #f7f7f7;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

@@ -1,0 +1,40 @@
+.profile {
+  max-width: 1300px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.profile__header {
+  display: flex;
+  margin-top: 3rem;
+}
+
+.profile__headerimage {
+  flex: 0.4;
+  background-color: white;
+  text-align: center;
+  padding: 20px;
+  border-radius: 20px 0 0 20px;
+  border: 2px solid #18345e;
+}
+
+.profile__headerimage > img {
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+.profile__headerinfo {
+  flex: 0.6;
+  background-color: #18345e;
+  color: white;
+  border-radius: 0 20px 20px 0;
+  padding-left: 10%;
+  padding-right: 10%;
+  border-left: 10px solid #f0ab20;
+}
+
+.profile__blogs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
