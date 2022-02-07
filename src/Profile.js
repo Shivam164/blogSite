@@ -1,12 +1,26 @@
+import { useEffect, useContext } from 'react';
+import { ProfileContext } from './Contexts/Context';
 import Cards from './Cards';
 import './style/Profile.css';
+import { useHistory } from 'react-router-dom';
 
 const Profile = () => {
+
+    const {profile, setProfile, signedIn, setSignedIn} = useContext(ProfileContext);
+    const history = useHistory();
+
+    useEffect(() => {
+        console.log(profile);
+        if(!profile){
+            history.push('/signIn');
+        }
+    },[]);
+
     return ( 
         <div className="profile">
             <div className="profile__header">
                 <div className="profile__headerimage">
-                    <img src="https://userpic.codeforces.org/2018443/title/38fb16c17026a84c.jpg" alt="" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg" alt="" />
                 </div>
                 <div className="profile__headerinfo">
                     <h1 className='profile__name'>Shivam Kumar Pandey</h1>

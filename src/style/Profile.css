@@ -21,6 +21,7 @@
 .profile__headerimage > img {
   border-radius: 50%;
   border: 2px solid black;
+  width: 22vw;
 }
 
 .profile__headerinfo {

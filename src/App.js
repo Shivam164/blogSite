@@ -6,43 +6,49 @@ import Trending from './Trending';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Profile from './Profile';
-;
+import {useState} from 'react';
+import ProfileContextProvider from './Contexts/Context'; 
 
 function App() {
+
   return (
     <div className="app">
-      <Router>
-        <Switch>
+      <ProfileContextProvider>
+          <Router>
+            <Switch>
 
-          <Route exact path = "/">
-             <Home/>
-          </Route>
-          <Route exact path = "/create">
-             <Navbar/>
-             <Create/>
-          </Route>
+              <Route exact path = "/">
+                <Home/>
+              </Route>
 
-          <Route exact path = "/trending">
-             <Navbar/>
-             <Trending/>
-          </Route>
+              <Route exact path = "/create">
+                <Navbar/>
+                <Create/>
+              </Route>
 
-          <Route exact path = "/signIn">
-             <SignIn/>
-          </Route>
+              <Route exact path = "/trending">
+                <Navbar/>
+                <Trending/>
+              </Route>
 
-          <Route exact path = "/signUp">
-             <SignUp/>
-          </Route>
+              <Route exact path = "/signIn">
+                <SignIn/>
+              </Route>
 
-          <Route exact path = "/profile">
-            <Navbar/>
-             <Profile/>
-          </Route>
-
-        </Switch>
-      </Router>
-      
+              <Route exact path = "/signUp">
+                <SignUp/>
+              </Route>
+              
+              <Route exact path = "/profile">
+                <Navbar/>
+                
+                  <Profile/>
+                
+              </Route>
+            
+            </Switch>
+          </Router>
+        </ProfileContextProvider>
     </div>
   );
 }

@@ -2,8 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Blog = require('./models/blogs');
 const User = require('./models/user');
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
@@ -16,6 +19,7 @@ mongoose.connect(URI,{ useNewUrlParser: true, useUnifiedTopology : true, useUnif
     .catch(err => console.log(err));
 
 app.post('/create',(req,res) => {
+    console.log(req.body);
     const blog = new Blog(req.body);
 
     blog.save()
@@ -24,7 +28,8 @@ app.post('/create',(req,res) => {
             res.send(result);
         })
         .catch(err => {
-            console.log("found error while saving the blog in the database")
+            console.log("found error while saving the blog in the database");
+            console.log(err);
             res.sendStatus(404);
         })
 })
@@ -56,17 +61,17 @@ app.post('/signup',(req,res) => {
 app.post('/signin',(req,res) => {
     const email = req.body.email;
     const password = req.body.password;
-    console.log(req);
+
     User.find({email : email})
         .then(result => {
             if(result.length === 0){
-                res.json({"message" : "No such user is present"});
+                res.status(401).send({error : "No such user is present"});
             }else{
                 const person = result[0];
                 if(password === person.password){
                     res.json(person);
                 }else{
-                    res.sendStatus(401);
+                    res.status(401).send({error : "Entered password is wrong"});
                 }
             }
         })

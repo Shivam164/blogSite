@@ -1,9 +1,48 @@
 import './style/SignIn.css';
 import { Link } from 'react-router-dom';
 import pic01 from './images/pic01.png';
+import {useContext, useState} from 'react';
+import { ProfileContext } from './Contexts/Context';
+import { useHistory } from 'react-router-dom';
 
 const SignIn = () => {
 
+    const {profile, setProfile, signedIn, setSignedIn} = useContext(ProfileContext);
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
+    const history = useHistory();
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        fetch('http://localhost:8000/signin',{
+            method : "POST",
+            body : JSON.stringify({
+                email : email,
+                password : password
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }})
+            .then(result => {
+                console.log(result);
+                if(!result.ok){
+                    return result.json().then((body) => {
+                        throw new Error(body.error);
+                      })
+                }else{
+                    return result.json();
+                }
+            })
+            .then(user => {
+                console.log(user);
+                setSignedIn(true);
+                setProfile(user);
+                history.push('/');
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
+    }
 
     return ( 
         <div className="login">
@@ -17,11 +56,11 @@ const SignIn = () => {
                     <form>
                         <h1>Sign In</h1>
                         <label>Email</label>
-                        <input type="email" />
+                        <input type="email" value={email} onChange={e => setEmail(e.target.value)}/>
                         <label>Password</label>
-                        <input type="password" id="myInput" />
+                        <input type="password" id="myInput" value = {password} onChange = {e => {setPassword(e.target.value)}} />
                         
-                        <button>Sign In</button>
+                        <button onClick={handleSubmit}>Sign In</button>
                         <div className='signup'>
                         <p>Don't have an account?</p>
                         <Link to="/signup">Sign Up</Link>
