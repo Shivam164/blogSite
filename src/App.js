@@ -8,6 +8,7 @@ import SignUp from './SignUp';
 import Profile from './Profile';
 import {useState} from 'react';
 import ProfileContextProvider from './Contexts/Context'; 
+import View from './View';
 
 function App() {
 
@@ -41,11 +42,14 @@ function App() {
               
               <Route exact path = "/profile">
                 <Navbar/>
-                
-                  <Profile/>
-                
+                <Profile/>
               </Route>
-            
+
+              <Route exact path = "/view/:id">
+                <Navbar/>
+                <View/>
+              </Route>
+
             </Switch>
           </Router>
         </ProfileContextProvider>

@@ -1,0 +1,49 @@
+.view {
+  width: 75vw;
+  margin: 0 auto;
+  padding: 1rem 5rem;
+  position: relative;
+  margin-top: 2rem;
+  border-radius: 0 20px 20px 0;
+  box-shadow: 0 0 0 0 24px black;
+  border-left: 3px solid #7207fa;
+}
+
+.blog__body {
+  font-size: large;
+}
+
+.blog__author {
+  text-align: right;
+  font-size: larger;
+  font-weight: 600;
+}
+
+.like__section {
+  display: flex;
+  align-items: center;
+}
+
+.like__section > * {
+  padding-right: 1rem;
+}
+
+.blog__likeIcon {
+  cursor: pointer;
+}
+
+.view__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.view__footer > button {
+  all: unset;
+  background-color: #7207fa;
+  height: fit-content;
+  color: white;
+  padding: 0.7rem;
+  border-radius: 5px;
+  cursor: pointer;
+}

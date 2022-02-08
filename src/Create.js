@@ -29,6 +29,7 @@ function Create() {
           authorName : profile.name,
           comments : [],
           likes : 0,
+          likedBy : [],
           timestamp : `${new Date()}`
         }),
         headers : {
@@ -41,13 +42,27 @@ function Create() {
             return result.json().then(body => {
               throw new Error(body.error);
             })
-        }else{
-          history.push('/');
         }
       })
       .catch(err => {
         console.log(err.message);
       })
+
+      fetch(`http://localhost:8000/incBlogCount/${profile._id}`,{
+            method : 'PUT'
+          })
+          .then(result => {
+            if(result.ok){
+              history.push('/');
+            }else{
+              return result.json().then(body => {
+                throw new Error(body.error);
+              })
+            }
+          })
+          .catch(err => {
+            console.log(err.message);
+          })
     }
 
   return (

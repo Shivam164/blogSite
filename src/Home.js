@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './style/Home.css';
 import Cards from './Cards';
+import { useEffect } from 'react';
+import { ProfileContext } from './Contexts/Context';
 
 function Home() {
+
+    const {blogs, setBlogs} = useContext(ProfileContext);
+    useEffect(() => {
+        fetch('http://localhost:8000/blogs',{
+            method : 'GET',
+        })
+        .then(result => {
+            if(!result.ok){
+                return result.json().then((body) => {
+                    throw new Error(body.error);
+                })
+            }else{
+                return result.json();
+            }
+        })
+        .then(_blogs => {
+            setBlogs(_blogs);
+            console.log(_blogs);
+        })
+        .catch(err => {
+            console.log(err.message);
+        })
+    },[]);
+
   return (
   <div className = "home">
       <div className="banner">
@@ -24,11 +50,9 @@ function Home() {
       </div>
       {/* Main Section  */}
       <div className="blogs">
-            <Cards/>
-            <Cards/>
-            <Cards/>
-            <Cards/>
-            <Cards/>
+            {blogs.map((blog) => (
+                <Cards author={blog.authorName} likes={blog.likes} comments={blog.comments} authorId = {blog.authorId} body={blog.body} title={blog.title} id={blog._id} />
+            ))}
       </div>
   </div>
   );}

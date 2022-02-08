@@ -1,6 +1,22 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// comment Schema
+const commentSchema = new Schema({
+    text:{
+        type : String,
+        defalult : '',
+        trim : true,
+        required : true
+    },
+    user:{
+        type : String,
+        default : '',
+        required : true,
+        trim : true
+    }
+})
+
 // blog Shcema
 const blogSchema = new Schema({
     title: {
@@ -20,12 +36,15 @@ const blogSchema = new Schema({
         required : true
     },
     comments : {
-        type : [String],
+        type : [commentSchema],
         required : false
     },
     likes : {
         type : Number,
         required : true
+    },
+    likedBy : {
+        type : [String],
     }
 },{timestamp : true});
 

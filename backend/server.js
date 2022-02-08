@@ -18,6 +18,17 @@ mongoose.connect(URI,{ useNewUrlParser: true, useUnifiedTopology : true, useUnif
     })
     .catch(err => console.log(err));
 
+app.get('/blogs',(req,res) => {
+    Blog.find()
+        .then(result => {
+            res.send(result);
+        })
+        .catch(err => {
+            res.status(500).send({'message' : "couldn't send data"});
+        })
+})
+
+
 app.post('/create',(req,res) => {
     console.log(req.body);
     const blog = new Blog(req.body);
@@ -32,6 +43,8 @@ app.post('/create',(req,res) => {
             console.log(err);
             res.sendStatus(404);
         })
+    
+        
 })
 
 app.post('/signup',(req,res) => {
@@ -95,9 +108,43 @@ app.delete('/deleteBlog', (req, res) => {
 
 app.put('/incrementLike/:id', (req,res) => {
     const id = req.params.id;
-    Blog.findByIdAndUpdate({_id : id} ,{$inc: { likes : 1 }})
+    console.log(req.body.user);
+    Blog.findByIdAndUpdate({_id : id} ,{$inc: { likes : 1 }}, {$push : {likedBy : req.body.user}})
         .then(result => {
-            res.status(200).json({'message' : 'likes incremented'});
+            Blog.findByIdAndUpdate({_id : id}, {$push : {likedBy : req.body.user}})
+                .then(Res => {
+                    res.status(200).json({'message' : 'likes incremented'});
+                }).catch(error => {
+                    console.log("in pushing ", error);
+                })
+        })
+        .catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
+
+    
+})
+
+app.put('/incBlogCount/:id', (req,res) => {
+    const id = req.params.id;
+    User.findByIdAndUpdate({_id : id}, {$inc : {blogCount : 1}})
+        .then(result => {
+            res.status(200).json({'message' : 'blogcount incremented'});
+        })
+        .catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        })
+})
+
+app.put('/addComment/:id', (req, res) => {
+    const id = req.params.id;
+    console.log(req.body);
+    Blog.findByIdAndUpdate({_id : id}, {$push : {comments : req.body}})
+        .then(result => {
+            console.log("added data");
+            res.status(200).json({'message' : 'added one more comment into the array'});
         })
         .catch(err => {
             console.log(err);
