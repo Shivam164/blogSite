@@ -1,0 +1,9 @@
+.Comment__user {
+  font-weight: 600;
+}
+
+.Comment {
+  background-color: rgb(222, 233, 233);
+  padding: 0.7rem;
+  border-bottom: 2px solid white;
+}

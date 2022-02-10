@@ -27,7 +27,7 @@ function Cards({ author, likes, comments, authorId, body, title, id }) {
 
       {/* card image  */}
       <div className="card__image">
-        <p>{title}</p>
+        <p>{title.toUpperCase()}</p>
         <img src="https://cdn.pixabay.com/photo/2022/01/19/00/36/sea-6948569__340.jpg" alt="" />
       </div>
 

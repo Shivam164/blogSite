@@ -36,7 +36,11 @@ app.post('/create',(req,res) => {
     blog.save()
         .then(result => {
             console.log("data has been saved into the database", result);
-            res.send(result);
+            User.findByIdAndUpdate({_id : req.body.authorId},{$inc : {blogCount : 1}})
+                .then(Res => {
+                    console.log("done Updating data");
+                    res.send(Res)
+                })
         })
         .catch(err => {
             console.log("found error while saving the blog in the database");
@@ -153,5 +157,15 @@ app.put('/addComment/:id', (req, res) => {
 })
 
 
-app.listen(8000,() => console.log("connected to localhost 8000"));
+const server = app.listen(8000,() => console.log("connected to localhost 8000"));
  
+const io = require('socket.io')(server, {
+    pingTimeout: 60000,
+    cors: {
+        origin : "http://localhost:3000",
+    }
+});
+
+io.on('connection', socket => {
+    console.log("connected to socket.io");
+})

@@ -7,6 +7,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import './style/View.css';
 import { useHistory } from 'react-router-dom';
 import Comment from './Comment';
+import Allcomments from './Allcomments';
 
 function View() {
 
@@ -14,33 +15,42 @@ function View() {
     const {id} = useParams();
     const history = useHistory();
     const [show,setShow] = useState(false);
+
+    useEffect(() => {
+        console.log(profile);
+        if(!profile){
+            history.push('/signIn');
+        }
+    },[]);
     
     const handleLike = (id) => {
 
         if(!profile){
             history.push('/signIn');
+        }else{
+            console.log("like button clicked");
+            fetch(`http://localhost:8000/incrementLike/${id}`,{
+                method : 'PUT',
+                body : JSON.stringify({
+                    user : profile._id
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+            .then(result => {
+                if(!result.ok){
+                    return result.json().then(body => {
+                        throw new Error(body.error);
+                    })
+                }
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
         }
 
-        console.log("like button clicked");
-        fetch(`http://localhost:8000/incrementLike/${id}`,{
-            method : 'PUT',
-            body : JSON.stringify({
-                user : profile._id
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-        .then(result => {
-            if(!result.ok){
-                return result.json().then(body => {
-                    throw new Error(body.error);
-                })
-            }
-        })
-        .catch(err => {
-            console.log(err.message);
-        })
+        
 
     }
 
@@ -66,6 +76,7 @@ function View() {
                 <button onClick={() => setShow(true)}>COMMENT</button>
             </div>
             {show && <Comment className='write__comment' setShow={setShow} id={Blog._id}/>}
+            <Allcomments comments = {Blog.comments}/>
           </>
           
       ))}

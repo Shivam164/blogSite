@@ -32,6 +32,7 @@ function Comment(props) {
         .catch(err => {
             console.log(err.message);
         })
+        props.setShow(false);
     }
 
   return (

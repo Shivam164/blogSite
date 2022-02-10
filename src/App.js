@@ -6,11 +6,18 @@ import Trending from './Trending';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Profile from './Profile';
-import {useState} from 'react';
 import ProfileContextProvider from './Contexts/Context'; 
 import View from './View';
+import io from 'socket.io-client';
+import { useEffect } from 'react';
+const ENDPOINT = "http://localhost:8000";
+var socket;
 
 function App() {
+
+useEffect(() => {
+   socket = io(ENDPOINT);
+},[])
 
   return (
     <div className="app">
