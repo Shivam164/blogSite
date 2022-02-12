@@ -9,15 +9,10 @@ import Profile from './Profile';
 import ProfileContextProvider from './Contexts/Context'; 
 import View from './View';
 import io from 'socket.io-client';
-import { useEffect } from 'react';
 const ENDPOINT = "http://localhost:8000";
-var socket;
+const socket = io.connect(ENDPOINT);
 
 function App() {
-
-useEffect(() => {
-   socket = io(ENDPOINT);
-},[])
 
   return (
     <div className="app">
@@ -26,35 +21,35 @@ useEffect(() => {
             <Switch>
 
               <Route exact path = "/">
-                <Home/>
+                <Home socket = {socket}/>
               </Route>
 
               <Route exact path = "/create">
                 <Navbar/>
-                <Create/>
+                <Create socket = {socket}/>
               </Route>
 
               <Route exact path = "/trending">
                 <Navbar/>
-                <Trending/>
+                <Trending socket = {socket}/>
               </Route>
 
               <Route exact path = "/signIn">
-                <SignIn/>
+                <SignIn socket = {socket}/>
               </Route>
 
               <Route exact path = "/signUp">
-                <SignUp/>
+                <SignUp socket = {socket}/>
               </Route>
               
               <Route exact path = "/profile">
                 <Navbar/>
-                <Profile/>
+                <Profile socket = {socket}/>
               </Route>
 
               <Route exact path = "/view/:id">
                 <Navbar/>
-                <View/>
+                <View socket = {socket}/>
               </Route>
 
             </Switch>

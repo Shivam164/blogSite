@@ -112,7 +112,6 @@ app.delete('/deleteBlog', (req, res) => {
 
 app.put('/incrementLike/:id', (req,res) => {
     const id = req.params.id;
-    console.log(req.body.user);
     Blog.findByIdAndUpdate({_id : id} ,{$inc: { likes : 1 }}, {$push : {likedBy : req.body.user}})
         .then(result => {
             Blog.findByIdAndUpdate({_id : id}, {$push : {likedBy : req.body.user}})
@@ -160,7 +159,6 @@ app.put('/addComment/:id', (req, res) => {
 const server = app.listen(8000,() => console.log("connected to localhost 8000"));
  
 const io = require('socket.io')(server, {
-    pingTimeout: 60000,
     cors: {
         origin : "http://localhost:3000",
     }
@@ -168,4 +166,9 @@ const io = require('socket.io')(server, {
 
 io.on('connection', socket => {
     console.log("connected to socket.io");
+    socket.on('incLike', BlogId => {
+        console.log("trying to increment again", BlogId);
+        socket.emit('incLike', BlogId);
+        socket.broadcast.emit('incLike',BlogId);
+    })
 })

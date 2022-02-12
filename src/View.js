@@ -9,9 +9,11 @@ import { useHistory } from 'react-router-dom';
 import Comment from './Comment';
 import Allcomments from './Allcomments';
 
-function View() {
 
-    const {blogs, profile} = useContext(ProfileContext);
+
+function View({ socket }) {
+
+    const {blogs, profile, setBlogs} = useContext(ProfileContext);
     const {id} = useParams();
     const history = useHistory();
     const [show,setShow] = useState(false);
@@ -20,11 +22,35 @@ function View() {
         console.log(profile);
         if(!profile){
             history.push('/signIn');
-        }
+        }   
     },[]);
+
+    useEffect(() => {
+        socket.on('incLike', BlogId => {
+                console.log("listening");
+                const _blogs = blogs;
+                (_blogs).forEach(blog => {
+                    if(blog._id == BlogId.id){
+                        blog.likes++;
+                        return;
+                    }
+                })
+                setBlogs(_blogs);
+            })
+    },[]);
+
+    const incrementLike = () => {
+        const _blogs = blogs;
+        (_blogs).forEach(blog => {
+            if(blog._id == id){
+                blog.likes++;
+                return;
+            }
+        })
+        setBlogs(_blogs);   
+    }
     
     const handleLike = (id) => {
-
         if(!profile){
             history.push('/signIn');
         }else{
@@ -43,16 +69,18 @@ function View() {
                     return result.json().then(body => {
                         throw new Error(body.error);
                     })
+                }else{
+                    console.log("here :|");
+                    socket.emit('incLike', { id });
+                    // incrementLike();
                 }
             })
             .catch(err => {
                 console.log(err.message);
             })
         }
-
-        
-
     }
+
 
     const color = (arr) => {
         console.log("in here");

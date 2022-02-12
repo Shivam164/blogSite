@@ -5,9 +5,11 @@ import Cards from './Cards';
 import { useEffect } from 'react';
 import { ProfileContext } from './Contexts/Context';
 
+
 function Home() {
 
     const {blogs, setBlogs} = useContext(ProfileContext);
+
     useEffect(() => {
         fetch('http://localhost:8000/blogs',{
             method : 'GET',
@@ -29,6 +31,7 @@ function Home() {
             console.log(err.message);
         })
     },[]);
+
 
   return (
   <div className = "home">
