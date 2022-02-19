@@ -1,14 +1,17 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './style/Home.css';
 import Cards from './Cards';
 import { useEffect } from 'react';
 import { ProfileContext } from './Contexts/Context';
+import pic02 from './images/pic02.png';
 
 
 function Home() {
 
-    const {blogs, setBlogs} = useContext(ProfileContext);
+    const {blogs, setBlogs, profile, setProfile} = useContext(ProfileContext);
+    const history = useHistory();
+
 
     useEffect(() => {
         fetch('http://localhost:8000/blogs',{
@@ -32,6 +35,15 @@ function Home() {
         })
     },[]);
 
+    const handleSign = () => {
+        if(profile){
+            history.push('/');
+            setProfile(null);
+        }else{
+            history.push('/signIn');
+        }
+    }
+
 
   return (
   <div className = "home">
@@ -44,11 +56,17 @@ function Home() {
                 <Link to="/" >HOME</Link>
                 <Link to="/trending">TRENDING</Link>
                 <Link to="/create">WRITE</Link>
-                <Link to="/signin">SIGNIN</Link>
+                <Link onClick={handleSign}>{profile? "SIGN OUT" : "SIGN IN"}</Link>
                 <Link to="/profile">
                     <img className='navbar__image' src="https://userpic.codeforces.org/2018443/title/38fb16c17026a84c.jpg" alt="Image" />
                 </Link>
             </div>
+        </div>
+        <div className='banner__div'>
+            <h1>
+              Learn, Discover and Share Knowledge through Blogs.  
+            </h1>
+            <img className='banner__image' src={pic02}/>
         </div>
       </div>
       {/* Main Section  */}

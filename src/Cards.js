@@ -3,15 +3,22 @@ import './style/Cards.css';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CommentIcon from '@mui/icons-material/Comment';
 import { useHistory } from 'react-router-dom';
+import { ProfileContext } from './Contexts/Context';
+import { useContext } from 'react';
 
 function Cards({ author, likes, comments, authorId, body, title, id }) {
  
+  const {profile} = useContext(ProfileContext);
   const history = useHistory();
 
   const handleView = (e) => {
     e.preventDefault();
     console.log(id);
-    history.push(`/view/${id}`);
+    if(profile){
+      history.push(`/view/${id}`);
+    }else{
+      history.push('/signIn');
+    } 
   }
 
   return (

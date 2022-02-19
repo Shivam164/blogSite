@@ -8,10 +8,10 @@
   transition: 0.5s;
 }
 
-.card:hover {
+/* .card:hover {
   tarnsform: scale(1.3);
   box-shadow: 0 0 24px rgb(110, 105, 105);
-}
+} */
 
 .card__header > img {
   width: 50px;

@@ -39,6 +39,26 @@
   border: 2px solid white;
 }
 
+.banner__div {
+  display: flex;
+  margin: 0 auto;
+  width: 80vw;
+  justify-content: space-between;
+}
+
+.banner__div > h1 {
+  color: white;
+  font-size: xx-large;
+  font-weight: bolder;
+  padding-top: 8rem;
+  width: 30vw;
+  text-shadow: 1px 1px #030303;
+}
+
+.banner__image {
+  width: 20rem;
+}
+
 .blogs {
   background-color: #f7f7f7;
   display: flex;

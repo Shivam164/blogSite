@@ -9,8 +9,21 @@
   border-left: 3px solid #7207fa;
 }
 
+.view__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .blog__body {
   font-size: large;
+}
+
+.delete__icon {
+  padding: 7px;
+  border-radius: 50%;
+  box-shadow: 0 0 6px grey;
+  cursor: pointer;
 }
 
 .blog__author {

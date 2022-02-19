@@ -97,8 +97,8 @@ app.post('/signin',(req,res) => {
         })
 })
 
-app.delete('/deleteBlog', (req, res) => {
-    const id = req.body._id;
+app.delete('/deleteBlog/:id', (req, res) => {
+    const id = req.params.id;
     console.log(id);
     Blog.findByIdAndDelete(id)
         .then(result => {
@@ -170,5 +170,11 @@ io.on('connection', socket => {
         console.log("trying to increment again", BlogId);
         socket.emit('incLike', BlogId);
         socket.broadcast.emit('incLike',BlogId);
+    })
+
+    socket.on('increaseComment', ({user, text}) => {
+        console.log("trying to increment comments", user , text);
+        socket.emit('increaseComment', {user, text});
+        socket.broadcast.emit('increaseComment',{ user , text});
     })
 })
